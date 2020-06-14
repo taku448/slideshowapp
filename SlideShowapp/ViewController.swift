@@ -48,6 +48,8 @@ class ViewController: UIViewController {
         // 画像を読み込み
         let image = UIImage(named: name)
         
+        
+        
         // Image Viewに読み込んだ画像をセット
         imageView.image = image
     }
@@ -83,10 +85,7 @@ class ViewController: UIViewController {
             displayImage()
         }
     }
-
     
-            
-            
     @IBAction func switchButtonTap(_ sender: Any) {
         
 
@@ -137,14 +136,17 @@ class ViewController: UIViewController {
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
         let zoomInViewController:ZoomInViewController =
         segue.destination as! ZoomInViewController
-        
         let name = imageNameArray[displayImageNo]
         let image = UIImage(named: name)
         
         zoomInViewController.selectedImg = image
     }
+    @IBAction func unwind(_ segue: UIStoryboardSegue) {
+    }
+
     
         }
 
