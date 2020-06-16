@@ -57,6 +57,7 @@ class ViewController: UIViewController {
     
     @IBAction func nextButtonTap(_ sender: Any) {
         
+        
         if displayImageNo < imageNameArray.count - 1 {
         displayImageNo += 1
         displayImage()
@@ -91,7 +92,7 @@ class ViewController: UIViewController {
             switchButton.setTitle("停止", for: .normal)
             self.view.backgroundColor = UIColor.lightGray
             switchButton.titleLabel?.font =
-                UIFont.systemFont(ofSize: 25)
+                UIFont.systemFont(ofSize: 15)
             
         }
         else if self.timer != nil{
@@ -103,7 +104,7 @@ class ViewController: UIViewController {
             switchButton.setTitle("再生", for: .normal)
             
             self.view.backgroundColor = UIColor.white
-            switchButton.titleLabel?.font = UIFont.systemFont(ofSize: 20)
+            switchButton.titleLabel?.font = UIFont.systemFont(ofSize: 15)
             
             
         }
@@ -142,29 +143,13 @@ class ViewController: UIViewController {
         
         if self.timer != nil{
             self.timer.invalidate()
+            self.timer = nil
         }
-        
-        
-        
     }
-    
-    
     
     @IBAction func unwind(_ segue: UIStoryboardSegue) {
         
-        if self.timer == nil{
-                self.timer = Timer.scheduledTimer(timeInterval: 2.0, target: self, selector: #selector(updateTimer(_:)), userInfo: nil, repeats: true)
-                nextButton.isEnabled = false
-                backButton.isEnabled = false
-                
-                switchButton.setTitle("停止", for: .normal)
-                self.view.backgroundColor = UIColor.lightGray
-                switchButton.titleLabel?.font =
-                    UIFont.systemFont(ofSize: 25)
-                
-            }
-            else if self.timer != nil{
-                self.timer.invalidate()
+            
                 
                 self.timer = nil
                 nextButton.isEnabled = true
@@ -172,14 +157,13 @@ class ViewController: UIViewController {
                 switchButton.setTitle("再生", for: .normal)
                 
                 self.view.backgroundColor = UIColor.white
-                switchButton.titleLabel?.font = UIFont.systemFont(ofSize: 20)
                 
                 
             }
         }
                         
                 
-        }
+        
 
             
         
