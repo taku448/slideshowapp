@@ -11,7 +11,7 @@ import UIKit
 class ViewController: UIViewController {
     
     
-    @IBOutlet var tapGestureRecognizer: UITapGestureRecognizer!
+    @IBOutlet weak var OnTapButton: UIButton!
     
     @IBOutlet weak var imageView: UIImageView!
     
@@ -66,11 +66,6 @@ class ViewController: UIViewController {
     }
     }
     
-    
-    
-    
-    
-    
     @IBAction func backBottunTap(_ sender: Any) {
         
         
@@ -87,8 +82,6 @@ class ViewController: UIViewController {
     }
     
     @IBAction func switchButtonTap(_ sender: Any) {
-        
-
         
         if self.timer == nil{
             self.timer = Timer.scheduledTimer(timeInterval: 2.0, target: self, selector: #selector(updateTimer(_:)), userInfo: nil, repeats: true)
@@ -133,9 +126,12 @@ class ViewController: UIViewController {
     
     @IBAction func onTapAction(_ sender: Any) {
         self.performSegue(withIdentifier: "toZoomIn", sender: nil)
+        
+        
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
         
         let zoomInViewController:ZoomInViewController =
         segue.destination as! ZoomInViewController
@@ -143,10 +139,55 @@ class ViewController: UIViewController {
         let image = UIImage(named: name)
         
         zoomInViewController.selectedImg = image
+        
+        if self.timer != nil{
+            self.timer.invalidate()
+        }
+        
+        
+        
     }
+    
+    
+    
     @IBAction func unwind(_ segue: UIStoryboardSegue) {
-    }
+        
+        if self.timer == nil{
+                self.timer = Timer.scheduledTimer(timeInterval: 2.0, target: self, selector: #selector(updateTimer(_:)), userInfo: nil, repeats: true)
+                nextButton.isEnabled = false
+                backButton.isEnabled = false
+                
+                switchButton.setTitle("停止", for: .normal)
+                self.view.backgroundColor = UIColor.lightGray
+                switchButton.titleLabel?.font =
+                    UIFont.systemFont(ofSize: 25)
+                
+            }
+            else if self.timer != nil{
+                self.timer.invalidate()
+                
+                self.timer = nil
+                nextButton.isEnabled = true
+                backButton.isEnabled = true
+                switchButton.setTitle("再生", for: .normal)
+                
+                self.view.backgroundColor = UIColor.white
+                switchButton.titleLabel?.font = UIFont.systemFont(ofSize: 20)
+                
+                
+            }
+        }
+                        
+                
+        }
+
+            
+        
+        
+        
+            
 
     
-        }
+        
+
 
